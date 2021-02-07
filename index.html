@@ -96,6 +96,16 @@
 <script>
 
     const calculate = () => {
+
+        // Check if already set in url params
+        let params = (new URL(document.location)).searchParams;
+        if (params.get('subscribers')) {
+          document.getElementById('numSubscribers').value = params.get('subscribers');
+        }
+        if (params.get('monthlyCharge')) {
+          document.getElementById('monthlyCharge').value = params.get('monthlyCharge');
+        }
+
         const numSubscribers = parseInt(document.getElementById('numSubscribers').value);
         const monthlyCharge = parseFloat(document.getElementById('monthlyCharge').value);
 
