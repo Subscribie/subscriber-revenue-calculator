@@ -1,0 +1,53 @@
+<html>
+
+<h1>Subscriber Revenue Calculator</h1>
+
+Number of subscribers:
+  <input name="numSubscribers" id="numSubscribers" value="10" type="range" max=1000 /><span id="numSubscribersShow"></span><br />
+
+Monthly charge:
+  <input name="monthlyCharge" id="monthlyCharge" value="10" /> <br />
+
+<h2>Fees:</h2>
+
+<ul>
+  <li>Stripe: &pound; ...</li>
+  <li>Subscribie: &pound; ...</li>
+</ul>
+
+
+Your potential monthly revenue is: &pound;<span id="total"></span>
+
+
+<script>
+document.getElementById('numSubscribers').addEventListener('change', function(e) {
+  document.getElementById('numSubscribersShow').textContent = e.target.value;
+});
+
+document.addEventListener('click', function(e) {
+  numSubscribers = parseInt(document.getElementById('numSubscribers').value);
+  monthlyCharge = parseFloat(document.getElementById('monthlyCharge').value);
+
+  // Calculate
+  // Minus stripe fee %
+  stripeFee = 1.4
+  // Minus subscribie fee %
+  subscribieFee = 1.25
+
+
+  revenue = monthlyCharge * numSubscribers;
+
+  // Take away stripeFee (they also charge 20 pence)
+  revenue = revenue * ((100 - stripeFee) / 100) - 0.20;
+
+  // Take away subscribie fee
+  revenue = revenue * ((100 - subscribieFee) / 100);
+
+
+  // Update screen
+  document.getElementById('total').textContent = revenue.toFixed(2);
+  
+});
+</script>
+
+</html>
