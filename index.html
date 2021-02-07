@@ -1,53 +1,130 @@
-<html>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link href="./bs-grid.css" rel="stylesheet" type="text/css">
+    <link href="./style.css" rel="stylesheet" type="text/css">
+    <title>Subscriber Revenue Calculator</title>
+</head>
+<body>
 
-<h1>Subscriber Revenue Calculator</h1>
-
-Number of subscribers:
-  <input name="numSubscribers" id="numSubscribers" value="10" type="range" max=1000 /><span id="numSubscribersShow"></span><br />
-
-Monthly charge:
-  <input name="monthlyCharge" id="monthlyCharge" value="10" /> <br />
-
-<h2>Fees:</h2>
-
-<ul>
-  <li>Stripe: &pound; ...</li>
-  <li>Subscribie: &pound; ...</li>
-</ul>
+<div class="row">
+    <div class="col-sm-12 app-title text-center d-flex justify-content-center align-items-center">
+        <h1>Subscriber Revenue Calculator</h1>
+    </div>
+</div>
 
 
-Your potential monthly revenue is: &pound;<span id="total"></span>
+<div class="row calculator-body">
+    <div class="col-sm-12 my-2">
 
+        <div class="row">
+            <div class="col-sm-12 text-center w-100">
+                <span class="input-label">Number of subscribers</span>
+            </div>
+
+            <div class="col-sm-12 text-center d-flex justify-content-center align-items-center">
+                <span id="numSubscribersShow"></span>
+            </div>
+
+            <div class="col-sm-12 p-2">
+                <div class="input-wrapper">
+                    <label class="pure-material-slider w-100" for="numSubscribers">
+                        <input id="numSubscribers" max="1000" name="numSubscribers" type="range" value="20">
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 text-center p-2">
+                <span class="input-label">Monthly charge:</spancl>
+            </div>
+            <div class="col-sm-12">
+                <div class="input-wrapper">
+                    <label for="monthlyCharge">
+                        <input id="monthlyCharge" inputmode="numeric" name="monthlyCharge" value="10"/>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-12 p-0">
+                        <h2>Fees:</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <ul>
+                            <li>Stripe: &pound; ...</li>
+                            <li>Subscribie: &pound; ...</li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 d-flex text-center align-items-center justify-content-center">
+                        <span>Your potential monthly revenue is : </span>
+                    </div>
+                    <div class="col-sm-12 d-flex text-center align-items-center justify-content-center">
+                        <span class="total-result" id="total"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
 
 <script>
-document.getElementById('numSubscribers').addEventListener('change', function(e) {
-  document.getElementById('numSubscribersShow').textContent = e.target.value;
-});
 
-document.addEventListener('click', function(e) {
-  numSubscribers = parseInt(document.getElementById('numSubscribers').value);
-  monthlyCharge = parseFloat(document.getElementById('monthlyCharge').value);
+    const calculate = () => {
+        const numSubscribers = parseInt(document.getElementById('numSubscribers').value);
+        const monthlyCharge = parseFloat(document.getElementById('monthlyCharge').value);
 
-  // Calculate
-  // Minus stripe fee %
-  stripeFee = 1.4
-  // Minus subscribie fee %
-  subscribieFee = 1.25
+        // Calculate
+        // Minus stripe fee %
+        const stripeFee = 1.4
+        // Minus subscribie fee %
+        const subscribieFee = 1.25
 
 
-  revenue = monthlyCharge * numSubscribers;
+        let revenue = monthlyCharge * numSubscribers;
 
-  // Take away stripeFee (they also charge 20 pence)
-  revenue = revenue * ((100 - stripeFee) / 100) - 0.20;
+        // Take away stripeFee (they also charge 20 pence)
+        revenue = revenue * ((100 - stripeFee) / 100) - 0.20;
 
-  // Take away subscribie fee
-  revenue = revenue * ((100 - subscribieFee) / 100);
+        // Take away subscribie fee
+        revenue = revenue * ((100 - subscribieFee) / 100);
 
 
-  // Update screen
-  document.getElementById('total').textContent = revenue.toFixed(2);
-  
-});
+        // Update screen
+        document.getElementById('total').textContent = '£'.concat(revenue.toFixed(2));
+
+    };
+
+    document.getElementById('numSubscribers').addEventListener('input', function (e) {
+        document.getElementById('numSubscribersShow').textContent = e.target.value;
+    });
+
+    document.addEventListener('input', calculate);
+
+    (() => {
+        calculate();
+        document.getElementById('numSubscribersShow').textContent = document.getElementById('numSubscribers').value;
+    })();
+
 </script>
-
+</body>
 </html>
