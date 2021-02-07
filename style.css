@@ -255,7 +255,7 @@ h2 {
 .app-title {
     padding: 2rem 3rem;
     background: rgb(73, 104, 187);
-    background: linear-gradient(36deg, rgba(73, 104, 187, 1) 0%, rgba(78, 130, 175, 1) 35%, rgba(0, 212, 255, 1) 100%);
+    background: linear-gradient(36deg, rgb(106 17 203) 0%, rgb(72 67 228) 35%, rgb(37 117 252) 100%);
     border-bottom: 4px solid white;
     height: 100px;
 }
@@ -295,7 +295,7 @@ h2 {
 
 #numSubscribersShow {
     font-size: 90px;
-    color: #2196f3;
+    color: #4842e3;
     animation: fadeIn ease 0.8s;
     -webkit-animation: fadeIn ease 0.8s;
 }
@@ -306,7 +306,7 @@ h2 {
     padding: 1rem;
     text-align: center;
     font-size: 32px;
-    color: #2196f3;
+    color: #4842e3;
     border: 1px solid lightgrey;
     outline: none;
     animation: fadeIn ease 0.8s;
@@ -315,7 +315,7 @@ h2 {
 
 .total-result {
     animation: color-change 2s linear infinite;
-    border: 2px solid #2dbfea;
+    border: 2px solid #4842e3;
     padding: 1rem 6.5rem;
     margin: 3rem;
     font-size: 2.4rem;
@@ -382,18 +382,18 @@ h2 {
 
 @keyframes color-change {
     0%, 100% {
-        border-color: rgba(73, 104, 187, 1);
+        border-color: rgb(106 17 203);
     }
 
     25% {
-        border-color: rgba(78, 130, 175, 1);
+        border-color: rgb(72 67 228);
     }
 
     50% {
-        border-color: #0091EA;
+        border-color: rgb(37 117 252);
     }
 
     75% {
-        border-color: rgba(0, 212, 255, 1);
+        border-color: rgb(37 117 252);
     }
 }
