@@ -97,17 +97,13 @@
 
     const calculate = () => {
 
-        // Check if already set in url params
-        let params = (new URL(document.location)).searchParams;
-        if (params.get('subscribers')) {
-          document.getElementById('numSubscribers').value = params.get('subscribers');
-        }
-        if (params.get('monthlyCharge')) {
-          document.getElementById('monthlyCharge').value = params.get('monthlyCharge');
-        }
+        numSubscribers = parseInt(document.getElementById('numSubscribers').value);
+        monthlyCharge = parseFloat(document.getElementById('monthlyCharge').value);
 
-        const numSubscribers = parseInt(document.getElementById('numSubscribers').value);
-        const monthlyCharge = parseFloat(document.getElementById('monthlyCharge').value);
+
+        // Update url (might have changed number of subscrbers by user input)
+        history.pushState(null, '', '/?subscribers=' + numSubscribers + '&monthlyCharge=' + monthlyCharge);
+
 
         // Calculate
         // Minus stripe fee %
@@ -136,11 +132,21 @@
 
     document.getElementById('numSubscribers').addEventListener('input', function (e) {
         document.getElementById('numSubscribersShow').textContent = e.target.value;
+        document.getElementById('numSubscribers').textContent = e.target.value;
     });
 
     document.addEventListener('input', calculate);
 
     (() => {
+        // Check if already set in url params
+        let params = (new URL(document.location)).searchParams;
+        if (params.get('subscribers')) {
+          document.getElementById('numSubscribers').value = params.get('subscribers');
+        }
+        if (params.get('monthlyCharge')) {
+          document.getElementById('monthlyCharge').value = params.get('monthlyCharge');
+        }
+
         calculate();
         document.getElementById('numSubscribersShow').textContent = document.getElementById('numSubscribers').value;
     })();
