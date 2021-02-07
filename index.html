@@ -64,8 +64,8 @@
                     <div class="col-sm-12">
 
                         <ul>
-                            <li>Stripe: &pound; ...</li>
-                            <li>Subscribie: &pound; ...</li>
+                            <li>Stripe: <span id="stripeFee"></span></li>
+                            <li>Subscribie: <span id="subscribieFee"></span></li>
                         </ul>
 
                     </div>
@@ -73,10 +73,13 @@
 
                 <div class="row">
                     <div class="col-sm-12 d-flex text-center align-items-center justify-content-center">
-                        <span>Your potential monthly revenue is : </span>
+                        <span>Your potential monthly revenue is: </span>
                     </div>
                     <div class="col-sm-12 d-flex text-center align-items-center justify-content-center">
                         <span class="total-result" id="total"></span>
+                    </div>
+                    <div class="col-sm-12 d-flex text-center align-items-center justify-content-center">
+                      Per month
                     </div>
                 </div>
 
@@ -103,14 +106,18 @@
         let revenue = monthlyCharge * numSubscribers;
 
         // Take away stripeFee (they also charge 20 pence)
-        revenue = revenue * ((100 - stripeFee) / 100) - 0.20;
+        totalStripeFee = revenue - revenue * ((100 - stripeFee) / 100) - 0.20;
+        revenue = revenue - totalStripeFee;
 
         // Take away subscribie fee
-        revenue = revenue * ((100 - subscribieFee) / 100);
+        totalSubscribieFee = revenue - revenue * ((100 - subscribieFee) / 100);
+        revenue = revenue - totalSubscribieFee;
 
 
         // Update screen
-        document.getElementById('total').textContent = '£'.concat(revenue.toFixed(2));
+        document.getElementById('stripeFee').textContent = '£'.concat(totalStripeFee.toFixed(2)); // Show stripeFee
+        document.getElementById('subscribieFee').textContent = '£'.concat(totalSubscribieFee.toFixed(2)); // Show subscribieFee
+        document.getElementById('total').textContent = '£'.concat(revenue.toFixed(2)); // Set total monthly revenue
 
     };
 
