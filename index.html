@@ -120,7 +120,7 @@
         revenue = revenue - totalStripeFee;
 
         // Take away subscribie fee
-        totalSubscribieFee = (revenue - revenue * ((100 - subscribieFee) / 100)) - subscription;
+        totalSubscribieFee = (revenue - revenue * ((100 - subscribieFee) / 100)) + subscription;
         revenue = revenue - totalSubscribieFee;
 
         // Update screen
