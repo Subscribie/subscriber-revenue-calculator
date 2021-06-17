@@ -113,15 +113,14 @@
 
 
         let revenue = monthlyCharge * numSubscribers;
+        let revenue = monthlyCharge * numSubscribers;
 
         // Take away stripeFee (they also charge 20 pence)
-        totalStripeFee = revenue - revenue * ((100 - stripeFee) / 100) - 0.20;
-        revenue = revenue - totalStripeFee;
+        totalStripeFee = revenue - (revenue * ((100 - stripeFee) / 100)) - 0.20;
 
         // Take away subscribie fee
-        totalSubscribieFee = revenue - revenue * ((100 - subscribieFee) / 100);
-        revenue = revenue - totalSubscribieFee;
-
+        totalSubscribieFee = revenue - (revenue * ((100 - subscribieFee) / 100));
+        revenue = revenue - totalSubscribieFee - totalStripeFee; 
 
         // Update screen
         document.getElementById('stripeFee').textContent = '£'.concat(totalStripeFee.toFixed(2)); // Show stripeFee
