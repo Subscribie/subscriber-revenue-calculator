@@ -110,16 +110,17 @@
         const stripeFee = 1.4
         // Minus subscribie fee %
         const subscribieFee = 1.25
-
+        // Minus Subscribie subscription 
+        const subscription = 13.99
 
         let revenue = monthlyCharge * numSubscribers;
 
         // Take away stripeFee (they also charge 20 pence)
-        totalStripeFee = revenue - revenue * ((100 - stripeFee) / 100) - 0.20;
+        totalStripeFee = (revenue - revenue * ((100 - stripeFee) / 100) - 0.20);
         revenue = revenue - totalStripeFee;
 
         // Take away subscribie fee
-        totalSubscribieFee = revenue - revenue * ((100 - subscribieFee) / 100);
+        totalSubscribieFee = (revenue - revenue * ((100 - subscribieFee) / 100)) - subscription;
         revenue = revenue - totalSubscribieFee;
 
 
