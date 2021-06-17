@@ -123,7 +123,6 @@
         totalSubscribieFee = (revenue - revenue * ((100 - subscribieFee) / 100)) - subscription;
         revenue = revenue - totalSubscribieFee;
 
-
         // Update screen
         document.getElementById('stripeFee').textContent = '£'.concat(totalStripeFee.toFixed(2)); // Show stripeFee
         document.getElementById('subscribieFee').textContent = '£'.concat(totalSubscribieFee.toFixed(2)); // Show subscribieFee
